@@ -1,0 +1,434 @@
+```{r packages_regression,include=FALSE,message=F,warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(RColorBrewer)
+library(SuppDists)
+library(gtsummary)
+```
+
+```{r packages_chargement,include=FALSE,message=F,warning=FALSE}
+diabetes <- read.csv("data/diabetes-dataset.csv")
+```
+
+
+# Régressions
+
+
+## Introduction
+
+Sous le terme de régression se cache de nombreux modèles: parmi les plus simples
+en statistiques comme la régression linéaire et pour aller jusqu'à des modèles
+très complexes comme les modèles multiniveaux, la régression quantile, etc.
+
+La présentation ici ne se veut pas exhaustive. Nous présenterons que les régressions
+couramment utilisées dans en psychologie. 
+
+## Régression linéaire
+
+La régression linéaire est la plus simple des régressions. Elle suppose des 
+relations linéaires entre les variables comme pour la corrélation. La variable
+à expliquer est continue et les variables explicatives sont quantitatives ou
+qualitatives.
+
+Avant de faire de la modélisation, il est impératif de faire des statistiques
+descriptives des données. 
+
+### Simple
+
+Dans les statistiques descriptives, nous avons vu la corrélation. La régression
+linéaire simple n'est qu'une extension de la corrélation. Il y a une variable
+à expliquer et une variable explicative.
+
+\(y=ax+b+\epsilon\)
+
+En R, avec une variable __x__ et __y__, on écrit cette formule de façon presque
+identique :
+
+__lm(y~x,data=my.data)__
+
+Le tide remplace le signe égal et on spécifie la __data.frame__ avec l'option 
+__data__. Dans le calcul par la fonction __lm__, il y a automatiquement le calcul
+du terme a, la corrélation et le terme b.
+
+Comme cela a été vu dans le chapitre sur la corrélation il est d'observer une 
+relation linéaire entre la variable à expliquer et la variable explicative.
+
+Sinon il faut faire appliquer des transformations à la variable explicative.
+
+Cela suppose des liens linéaires entre la variable à expliquer et les variables
+explicatives.
+
+Par rapport à la corrélation, il y a un terme supplémentaire qui s'appelle en
+anglais l'__intercept__ ou __ordonnée à l'origine__.
+
+```{r correlation}
+plot(Sepal.Length~Petal.Width,data=iris,pch=20)
+abline(lm(Sepal.Length~Petal.Width,data=iris))
+```
+
+```{r}
+lm(Sepal.Length~Petal.Width,data=iris)
+```
+
+Le coefficient entre la variable à expliquer et la variable explcative est de 
+0,8886 tandis que l'ordonnée à l'origine est à 4.7776.
+
+Si vous regardez sur le graphique, l'ordonnée à l'origine est la valeur de \(y\)
+quand \(x=0\). Ici pour la longueur des pétales  et des sépales, l'__intercept__
+est la valeur pour une longueur nulle ce qui n'a pas de sens pratique.
+
+Aussi dans certains cas nous sommes amenés à centrer la variable en soutrayant la
+moyenne de la variable explicative pour avoir une valeur qui a du sens: en 
+centrant la variable l'ordonnée à l'origine est la valeur de la variable à expliquer
+pour la valeur moyenne de la variable explicative.
+
+```{r}
+lm(Sepal.Length~I(Petal.Width-mean(Petal.Width)),data=iris)
+```
+La valeurs pour la moyenne est donc de 5,8433 pour la valeur moyenne de 
+__Petal.width__. Ce qui a plus de sens.
+
+Sous R, on peut réaliser des calculs, des transformations de la valeur directement
+dans la régression comme c'est le cas dans l'exemple précédent avec l'opérateur
+__I()__. On peut l'utiliser pour ajouter le calcul d'un __log__ par exemple.
+
+### Multiple
+
+La relation linéaire ne doit pas forcement être visible entre la variable à 
+expliquer et les variables explicatives prises 2 à 2. En effet pour la 
+régression linéaire multiple les autres variables rentrent en jeu ce qui a 
+pour conséquence de rendre plus complexe la vérification  de la relation 
+linéraire.
+
+\(y=b_1x_1+b_2x_2+...+b_ix_i+b_0+\epsilon\)
+
+Comme pour la régression précédente on utilise le __~__ pour séparer à gauche la
+variable à expliquer des variables explicatives à droite. Les variables
+explicatives sont séparées par des __+__.
+
+```{r}
+lm(Sepal.Length~Sepal.Width+Petal.Width+Petal.Length,data=iris)
+```
+Là également on peut avoir envie de donner sens à la valeur de l'intercept. Il
+faut dans ce cas là enlever la moyenne à chaque variable pour centrer le modèle.
+Toujours avec l'opérateur __I()__.
+
+Si on veut savoir quel est le coefficient qui impacte le plus la variable 
+explicative, on peut comparer les pentes. Si on veut comparer les coefficients
+il faut qu'ils soient dans la même unité. Dans ce cas la méthode usuelle est
+de diviser par l'écart-type les variables explicatives et éventuellement la
+variable à expliquer. Cela donne des coefficients standardisés dont la valeur
+absolue de la taille indique l'amplitude de l'effet sur chacun des coefficients.
+
+```{r}
+iris.std <- iris %>% mutate(across(where(is.numeric), scale))
+(modele=lm(Sepal.Length~Sepal.Width+Petal.Width+Petal.Length,data=iris.std))
+```
+### Les diagnostics pour les deux types de régressions linéaires
+
+Avant de regarder les résultats, il faut vérifier que les diagnostics sont 
+corrects. En effet pour interpréter les résultats et notamment l'inférence (comme
+les tests sur les coefficients par exemple) il faut qu'un certain nombre 
+d'hypothèses soient vérifiées:
+
+1) Non colinéarité des variables explicatives: aucune variable ne doit être une
+combinaison linéaire d'une autre variable. 
+2) Indépendance des erreurs: les erreurs sont indépendantes entre observations
+3) Exogénéité : la taille des résidus doit être indépendante de la variable 
+explicatives
+4) Homoscédasticité : la variance des erreurs est constante
+5) Normalité des termes d'erreur : la distribution des termes d'erreurs doit être
+aléatoire et suivre une loi normale
+
+La non colinéarité se vérifie simplement en calculant le modèle. En effet la matrice
+est non inversible ou n'est pas de plein rang quand il y a des variables colinéaires.
+Certains tests plus complexe existent pour vérifier cette hypothèse notamment 
+lorsqu'on a beaucoup de variables.
+
+L'indépendance des résidus est rarement testé, il existe des tests comme le test
+de Durbin-Watson pour tester si les résidus sont auto-corrélés.
+
+```{r}
+library(car)
+durbinWatsonTest(modele)
+```
+Si le test n'est pas significatif alors il n'y a pas d'auto-corrélation.
+
+Les autres hypothèses s'évaluent à l'aide des graphiques de diagnostics 
+automatiques de R la plupart du temps :
+
+```{r diagnostics}
+plot(modele)
+```
+
+1) Le premier graphique __Residuals vs Fitted__ permet de tester l'exogénéité.
+Si on observe pas de corrélation ou de structure entre les valeurs prédites et
+les résidus alors l'hypothèse est vérifiée.
+2) L'homoscédasticité et la normalité sont testés à l'aide du premier et second 
+graphique qui permet de tester si la répartition suit une loi normale avec un 
+graphique __QQ plot__. Si les points se distribuent sur la droite lors la 
+distribution des résidus suit une loi normale.
+
+Les autres graphiques permettent de répérer les observations avec des valeurs
+extrêmes pour les résidus et les valeurs prédites. Dans le cas d'une régression
+avancée, il convient de vérifier les valeurs prises par ces observations extrêmes
+qui sont repérées par leurs numéros dans le __data.frame__.
+
+
+### L'interprétation des sorties
+
+Les sorties sont les suivantes :
+
+```{r}
+summary(modele)
+```
+Le tableau donne la valeur des coefficients (__Intercept__ et coefficients beta)
+dans la colonne __Estimate__. L'erreur standard associée à l'estimation des 
+coefficients, __Std. Error__, la valeur du test et la __p-value__ qui indique
+si le coefficient est non nul: si la __p-value__ est inférieure au seuil fixé 
+(généralement 0,05) alors le coefficient est significativement différent de 0.
+
+Regarder la valeur de l'erreur standard (__Std Error__) est important car si 
+elle est très grande au regard des coefficients par exemple cela indique 
+généralement que les hypothèses ne sont pas respectés et qu'il y a un problème
+d'identification du modèle.
+
+Ensuite les résultats sont le __Multiple R-square__ qui indique le R²,
+c'est-à-dire la variance expliquée par le modèle. Une valeur le plus proche
+de 1 est ce que l'on cherche. Dans les sciences humaines des valeurs de coeffcients
+proche de 0,3 reste satisfaisant.
+
+les résultats sont le __Adjusted R-square__ est équivalent au R² mais il est pondéré
+par la complexité du modèle. En effet plus il y a de variable explicatrice plus 
+le modèle va être explicatif. Mécaniquement. Aussi ce coefficient permet de
+pondérer le R² avec le nombre de variables pour limiter cet effet.
+
+Le __F-statistic__ et la __p-value__ associée sur la dernière ligne donne un test
+de la non nullité du R². En pratique ce test n'est pas très utile.
+
+
+### Comprendre la régression avec des variables qualitatives
+
+Jusqu'ici les variables étaient des variables quantitatives. Il fallait 
+interpréter la pente des variables pour avoir une idée des effets sur la 
+variable à expliquer.
+
+Dans le cas d'une variable explicative, l'interprétation est légèrement différente.
+
+Pour bien comprendre, on va dichotomiser une variable qualitative :
+
+```{r}
+set.seed(42)
+head(model.matrix(~Species-1,data=iris)[sample(1:nrow(iris)),])
+```
+On a trois espèces, quand R va ajouter cette variable, il va dichotomiser la variable.
+
+Nous aurons par exemple dans l'équation (première ligne) :
+
+\(y=b_1x_1+b_2x_2+...+b_ix_i+b_Setosa*1+b_Versicolor*0+b_Virginica*0+b_0+\epsilon\) soit 
+\(y=b_1x_1+b_2x_2+...+b_ix_i+b_Setosa*1+b_0+\epsilon\)
+
+ou (deuxième ligne)
+
+\(y=b_1x_1+b_2x_2+...+b_ix_i+b_Setosa*0+b_Versicolor*1+b_Virginica*0+b_0+\epsilon\) soit 
+\(y=b_1x_1+b_2x_2+...+b_ix_i+b_Versicolor*1+b_0+\epsilon\)
+
+Le __x__ va être 0 ou 1. Par conséquent, cela ne va pas modifier la pente mais l'ordonnée
+à l'origine du point. De plus si on laisse les trois variables alors nous allons 
+avoir un souci. En effet les trois modalités, si elles sont toutes présentes
+vont être colinéaires: si Setosa est à 1 alors Versicolor et Virginica sont à 0.
+C'est mécanique. Nous violerions alors une hypothèse du modèle. 
+
+Donc nous allons enlever une des modalités que nous allons appeler modalité de 
+référence. Donc l'intercept sera calculé avec cette modalité de référence: 
+il faudra lire, l'**intercept quand l'espèce est setosa vaut**. 
+Quand l'iris sera versicolor ou virginica, il faudra lire 
+**par rapport à une plante Setosa l'intercept quand l'espèce est versicolor vaut**.
+
+Par défaut quand on rajoute une variable qualitative (un facteur) R utilise comme
+valeur de référence la première modalité pour une facteur ordonné ou bien la
+première dans l'ordre alphabétique. Pour changer ce comportement, il faut taper :
+
+```{r}
+(modele=lm(Sepal.Length~Sepal.Width+Petal.Width+Petal.Length+relevel(Species,ref="versicolor"),data=iris.std))
+summary(modele)
+```
+ou bien
+
+```{r}
+iris.std$Species2 <- relevel(iris.std$Species,ref="versicolor")
+(modele=lm(Sepal.Length~Sepal.Width+Petal.Width+Petal.Length+Species2,data=iris.std))
+summary(modele)
+```
+
+Il est à noter qu'on peut utiliser gtsummary :
+
+```{r}
+modele |> 
+  tbl_regression() |> 
+  bold_labels()
+```
+
+
+
+## Régression logistique
+
+Dans le cas de la régression logistique, la variable à expliquer est binaire ou
+dichotomique.
+
+\(y=\frac{e^{b_1x_1+b_2x_2+...+b_ix_i+b_0}}{1+e^{b_1x_1+b_2x_2+...+b_ix_i+b_0}}\)
+
+En fait les observations vont prendre la valeur 0 ou 1 pour la variable à expliquer.
+Par contre le modèle lui ne va pas prendre que des valeurs 0 ou 1. En effet
+il va modéliser la probabilité que la valeur prise soit 1. 
+
+**Donc les valeurs prises par le modèle vont varier de 0 à 1**.
+
+### Modélisation
+
+L'aspect du modèle sous R est très similaire à la forme utilisée pour les régressions
+linéaires. Les mêmes opérateurs et écritures sont autorisées. 
+
+Par contre comme ce n'est pas une régression linéaire, la fonction à appeler est
+légèrement différente ainsi que les arguments supplémentaires.
+
+```{r}
+modele <- glm(Outcome~Pregnancies+Glucose+BloodPressure+SkinThickness+Insulin+BMI+DiabetesPedigreeFunction+
+      DiabetesPedigreeFunction+Age,data=diabetes,family=binomial(link="logit"))
+```
+
+```{r}
+summary(modele)
+```
+Ici il n'y a pas d'hypothèse à vérifier particulièrement.
+
+Nous retrouvons le tableau des coefficients avec les estimations et les p-values.
+
+Les __Estimates__ sont d'une interprétation très différents. 
+
+Pour les variables continues, les coefficients sont interprétables selon leur 
+signe si ils sont significativement différents de 0. Si le signe est négatif 
+alors l'augmentation de la valeur tend à diminuer la probabilité que l'outcome 
+soit égal à 1 et inversement.
+
+Pour les variables dichotomiques, en prenant l'exponentielle du coefficient, nous
+obtenons l'odds ratio:
+1) OR=1, la maladie est indépendante du symptôme
+2) OR>1, la maladie est plus fréquente pour les individus qui ont le symptôme (var=1).
+3) OR<1, la maladie est plus fréquente pour les individus qui n’ont pas le symptôme (var=0).
+
+Pour une régression logistique, il n'y a pas de R². Parfois on peut voir un
+pseudo R². Mais sont utilisation n'est pas recommandé.
+
+Sous R, il faut calculer la régression logistique avec la fonction __lrm__ du 
+paquet __rms__. 
+
+```{r}
+library(rms)
+mod1b <- lrm(Outcome~Pregnancies+Glucose+BloodPressure+SkinThickness+Insulin+BMI+DiabetesPedigreeFunction+
+      DiabetesPedigreeFunction+Age,data=diabetes)
+print(mod1b)
+```
+<!-- Sinon on peut calculer la probabilité de l'évènement avec cette fonction : -->
+
+<!-- ```{r} -->
+<!-- logit_inverse <- binomial("logit") |> purrr::pluck("linkinv") -->
+<!-- logit_inverse(coef(modele)) -->
+<!-- ``` -->
+
+<!-- Les interprétations pour les variables quantitatives est délicat. Attention à  -->
+<!-- l'intercept, c'est pour une valeur où tous les autres variables valent zéro.  -->
+
+```{r graphforests}
+modele |> 
+  ggstats::ggcoef_table(exponentiate = TRUE)
+```
+  
+
+  
+  
+## Sélection des variables
+
+### Régressions pas à pas
+
+Cela consiste à comparer des modèles en changer les variables une par une en
+calculant si la variable améliore ou détériore le modèle. Comme valeur de comparer
+la fonction utilise l'AIC ou le BIC qui sont des indices de __fit__ du modèle.
+
+Soit :
+1) on part d'un modèle avec toutes les variables et on enlève au fur et à mesure (backward)
+2) on part d'un modèle avec une variable choisie aléatoirement et on ajoute au fur et à mesure (forward)
+3) on part d'un modèle avec une variable choisie aléatoirement et on ajoute au fur et à mesure ou on enlève (both ou stepwise)
+
+```{r}
+set.seed(42)
+(modele2 <- step(modele,direction="both"))
+```
+
+```{r}
+summary(modele2)
+```
+
+Ces méthodes ne sont pas enthousiasmantes. En effet cela amène à des modèles qui :
+
+- dépendent du modèles tirés au hasard au début (stepwise/both)
+- sont conservatifs comme la méthode backward qui tend à garder plus de variable que nécessaire
+- nécessite beaucoup de comparaison et donc des approximations sur les tests
+- ...
+
+Il est à noter que si on veut garder les variables dont les coefficients sont significatifs
+à 0,05, il suffit de modifier le paramètre k.
+
+```{r}
+require(MASS)
+set.seed(42)
+(modele2 <- stepAIC(modele,direction="both",k=5))
+```
+
+```{r}
+summary(modele2)
+```
+
+Pour contrer certaines critiques il est possible de personnaliser le démarrage et
+les variables à disposition à l'aide de l'argument __scope__.
+
+Par exemple pour un __stepwise__ en démarrant de __rien__.
+
+```{r}
+modnull <- glm(Outcome ~ 1,data=diabetes,family=binomial(link="logit"))
+modfull <- glm(Outcome ~ .,data=diabetes,family=binomial(link="logit"))
+(modele3 <- stepAIC(modele,direction="both",k=5,
+                    scope=list(lower=modnull,upper=modfull)))
+```
+
+```{r}
+summary(modele3)
+```
+Il est à noter que les résultats peuvent être donnés par gtsummary
+
+```{r}
+modele3 |> 
+  tbl_regression(exponentiate = TRUE) |> 
+  bold_labels()
+```
+
+
+On peut comparer  l'efficacité des modèles en utilisant la commande __compare_performance__
+du paquet __performance__.
+
+```{r}
+performance::compare_performance(modele, modele3,metrics="common")
+```
+
+
+
+### Régression Ridge, LASSO, Elastic, ...
+
+Ces méthodes qui seront proposées plus tard sont une alternative au méthodes
+pas à pas. Elles consiste à pondérer les coefficients et ainsi séléctionner
+les variables à part de critère mathématique plus robustes.
+
+
+
+
+

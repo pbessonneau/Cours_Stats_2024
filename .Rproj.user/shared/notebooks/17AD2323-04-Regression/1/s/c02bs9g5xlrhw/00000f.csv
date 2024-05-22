@@ -1,0 +1,2 @@
+"0","modele <- glm(Outcome~Pregnancies+Glucose+BloodPressure+SkinThickness+Insulin+BMI+DiabetesPedigreeFunction+"
+"0","      DiabetesPedigreeFunction+Age,data=diabetes,family=binomial(link=""logit""))"

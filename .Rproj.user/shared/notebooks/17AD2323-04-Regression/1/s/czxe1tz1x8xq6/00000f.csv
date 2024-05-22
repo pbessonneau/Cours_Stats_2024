@@ -1,0 +1,28 @@
+"0","iris.std <- iris %>% mutate(across(where(is.numeric), scale))"
+"0","(modele=lm(Sepal.Length~Sepal.Width+Petal.Width+Petal.Length,data=iris.std))"
+"1","
+Call:
+"
+"1",""
+"1","lm(formula = Sepal.Length ~ Sepal.Width + Petal.Width + Petal.Length, 
+    data = iris.std)"
+"1",""
+"1","
+
+"
+"1","Coefficients:
+"
+"1"," (Intercept)  "
+"1"," Sepal.Width  "
+"1"," Petal.Width  "
+"1","Petal.Length  "
+"1","
+"
+"1","  -1.176e-16  "
+"1","   3.426e-01  "
+"1","  -5.122e-01  "
+"1","   1.512e+00  "
+"1","
+"
+"1","
+"

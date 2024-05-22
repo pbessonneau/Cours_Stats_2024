@@ -1,0 +1,29 @@
+--- 
+title: "Notions de statistiques"
+author: "Pascal Bessonneau"
+date: "`r Sys.Date()`"
+documentclass: book
+bibliography: [book.bib, packages.bib]
+description: 
+  Le but est de faire un peu de révision sur les statistiques descriptives et 
+  les tests statistiques.
+link-citations: yes
+github-repo: pbessonneau/Cours_Stats_2024
+---
+
+
+
+
+# Statistiques descriptives et tests    
+
+Le but est de faire un peu de révision sur les statistiques descriptives et 
+les tests statistiques.
+
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

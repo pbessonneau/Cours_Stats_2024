@@ -1,0 +1,22 @@
+"0","lm(Sepal.Length~Petal.Width,data=iris)"
+"1","
+Call:
+"
+"1",""
+"1","lm(formula = Sepal.Length ~ Petal.Width, data = iris)"
+"1",""
+"1","
+
+"
+"1","Coefficients:
+"
+"1","(Intercept)  "
+"1","Petal.Width  "
+"1","
+"
+"1","     4.7776  "
+"1","     0.8886  "
+"1","
+"
+"1","
+"

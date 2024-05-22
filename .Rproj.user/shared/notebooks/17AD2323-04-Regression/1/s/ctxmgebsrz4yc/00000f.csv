@@ -1,0 +1,33 @@
+"0","library(car)"
+"2","Le chargement a nécessité le package : carData
+"
+"2","
+Attachement du package : ‘car’
+
+"
+"2","L'objet suivant est masqué depuis ‘package:dplyr’:
+
+    recode
+
+"
+"2","L'objet suivant est masqué depuis ‘package:purrr’:
+
+    some
+
+"
+"0","durbinWatsonTest(modele)"
+"1",""
+"1"," lag"
+"1"," Autocorrelation"
+"1"," D-W Statistic"
+"1"," p-value"
+"1","
+"
+"1","   1"
+"1","     -0.03992126"
+"1","      2.060382"
+"1","   0.804"
+"1","
+"
+"1"," Alternative hypothesis: rho != 0
+"

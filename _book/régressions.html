@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Régressions | Notions de statistiques</title>
+  <meta name="description" content="Le but est de faire un peu de révision sur les statistiques descriptives et les tests statistiques." />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Régressions | Notions de statistiques" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Le but est de faire un peu de révision sur les statistiques descriptives et les tests statistiques." />
+  <meta name="github-repo" content="pbessonneau/Cours_Stats_2024" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Régressions | Notions de statistiques" />
+  
+  <meta name="twitter:description" content="Le but est de faire un peu de révision sur les statistiques descriptives et les tests statistiques." />
+  
+
+<meta name="author" content="Pascal Bessonneau" />
+
+
+<meta name="date" content="2024-05-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tests.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Statistiques descriptives et tests</a></li>
+<li class="chapter" data-level="2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html"><i class="fa fa-check"></i><b>2</b> Statistiques descriptives</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#distribution"><i class="fa fa-check"></i><b>2.1</b> Distribution</a></li>
+<li class="chapter" data-level="2.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#indicateurs-de-position-mesures-de-tendance-centrale"><i class="fa fa-check"></i><b>2.2</b> Indicateurs de position (mesures de tendance centrale)</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#moyenne-arithmétqiue"><i class="fa fa-check"></i><b>2.2.1</b> Moyenne arithmétqiue</a></li>
+<li class="chapter" data-level="2.2.2" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#autres-moyennes"><i class="fa fa-check"></i><b>2.2.2</b> Autres moyennes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#indicateur-de-dispersion"><i class="fa fa-check"></i><b>2.3</b> Indicateur de dispersion</a></li>
+<li class="chapter" data-level="2.4" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#les-indicateurs-de-la-loi-normale"><i class="fa fa-check"></i><b>2.4</b> Les indicateurs de la loi normale</a></li>
+<li class="chapter" data-level="2.5" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#quantiles-ex-de-la-loi-normale."><i class="fa fa-check"></i><b>2.5</b> Quantiles, ex de la loi normale.</a></li>
+<li class="chapter" data-level="2.6" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#la-médiane-et-les-quantiles-usuelles"><i class="fa fa-check"></i><b>2.6</b> La médiane et les quantiles usuelles</a></li>
+<li class="chapter" data-level="2.7" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#corrélations"><i class="fa fa-check"></i><b>2.7</b> Corrélations</a></li>
+<li class="chapter" data-level="2.8" data-path="statistiques-descriptives.html"><a href="statistiques-descriptives.html#covariances"><i class="fa fa-check"></i><b>2.8</b> Covariances</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tests.html"><a href="tests.html"><i class="fa fa-check"></i><b>3</b> Tests</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tests.html"><a href="tests.html#convergence-vers-la-loi-normale"><i class="fa fa-check"></i><b>3.1</b> Convergence vers la loi normale</a></li>
+<li class="chapter" data-level="3.2" data-path="tests.html"><a href="tests.html#test-z"><i class="fa fa-check"></i><b>3.2</b> Test Z</a></li>
+<li class="chapter" data-level="3.3" data-path="tests.html"><a href="tests.html#test-de-student"><i class="fa fa-check"></i><b>3.3</b> Test de Student</a></li>
+<li class="chapter" data-level="3.4" data-path="tests.html"><a href="tests.html#erreur-de-type-i-et-ii"><i class="fa fa-check"></i><b>3.4</b> Erreur de Type I et II</a></li>
+<li class="chapter" data-level="3.5" data-path="tests.html"><a href="tests.html#tests-paramétriques-et-non-paramétriques"><i class="fa fa-check"></i><b>3.5</b> Tests “paramétriques” et non paramétriques</a></li>
+<li class="chapter" data-level="3.6" data-path="tests.html"><a href="tests.html#précautions-à-prendre-quand-on-travaille-avec-des-tests"><i class="fa fa-check"></i><b>3.6</b> Précautions à prendre quand on travaille avec des tests</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="régressions.html"><a href="régressions.html"><i class="fa fa-check"></i><b>4</b> Régressions</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="régressions.html"><a href="régressions.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="régressions.html"><a href="régressions.html#régression-linéaire"><i class="fa fa-check"></i><b>4.2</b> Régression linéaire</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="régressions.html"><a href="régressions.html#simple"><i class="fa fa-check"></i><b>4.2.1</b> Simple</a></li>
+<li class="chapter" data-level="4.2.2" data-path="régressions.html"><a href="régressions.html#multiple"><i class="fa fa-check"></i><b>4.2.2</b> Multiple</a></li>
+<li class="chapter" data-level="4.2.3" data-path="régressions.html"><a href="régressions.html#les-diagnostics-pour-les-deux-types-de-régressions-linéaires"><i class="fa fa-check"></i><b>4.2.3</b> Les diagnostics pour les deux types de régressions linéaires</a></li>
+<li class="chapter" data-level="4.2.4" data-path="régressions.html"><a href="régressions.html#linterprétation-des-sorties"><i class="fa fa-check"></i><b>4.2.4</b> L’interprétation des sorties</a></li>
+<li class="chapter" data-level="4.2.5" data-path="régressions.html"><a href="régressions.html#comprendre-la-régression-avec-des-variables-qualitatives"><i class="fa fa-check"></i><b>4.2.5</b> Comprendre la régression avec des variables qualitatives</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="régressions.html"><a href="régressions.html#régression-logistique"><i class="fa fa-check"></i><b>4.3</b> Régression logistique</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="régressions.html"><a href="régressions.html#modélisation"><i class="fa fa-check"></i><b>4.3.1</b> Modélisation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="régressions.html"><a href="régressions.html#sélection-des-variables"><i class="fa fa-check"></i><b>4.4</b> Sélection des variables</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="régressions.html"><a href="régressions.html#régressions-pas-à-pas"><i class="fa fa-check"></i><b>4.4.1</b> Régressions pas à pas</a></li>
+<li class="chapter" data-level="4.4.2" data-path="régressions.html"><a href="régressions.html#régression-ridge-lasso-elastic"><i class="fa fa-check"></i><b>4.4.2</b> Régression Ridge, LASSO, Elastic, …</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Notions de statistiques</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="régressions" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Régressions<a href="régressions.html#régressions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Introduction<a href="régressions.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Sous le terme de régression se cache de nombreux modèles: parmi les plus simples
+en statistiques comme la régression linéaire et pour aller jusqu’à des modèles
+très complexes comme les modèles multiniveaux, la régression quantile, etc.</p>
+<p>La présentation ici ne se veut pas exhaustive. Nous présenterons que les régressions
+couramment utilisées dans en psychologie.</p>
+</div>
+<div id="régression-linéaire" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Régression linéaire<a href="régressions.html#régression-linéaire" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La régression linéaire est la plus simple des régressions. Elle suppose des
+relations linéaires entre les variables comme pour la corrélation. La variable
+à expliquer est continue et les variables explicatives sont quantitatives ou
+qualitatives.</p>
+<p>Avant de faire de la modélisation, il est impératif de faire des statistiques
+descriptives des données.</p>
+<div id="simple" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Simple<a href="régressions.html#simple" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans les statistiques descriptives, nous avons vu la corrélation. La régression
+linéaire simple n’est qu’une extension de la corrélation. Il y a une variable
+à expliquer et une variable explicative.</p>
+<p><span class="math inline">\(y=ax+b+\epsilon\)</span></p>
+<p>En R, avec une variable <strong>x</strong> et <strong>y</strong>, on écrit cette formule de façon presque
+identique :</p>
+<p><strong>lm(y~x,data=my.data)</strong></p>
+<p>Le tide remplace le signe égal et on spécifie la <strong>data.frame</strong> avec l’option
+<strong>data</strong>. Dans le calcul par la fonction <strong>lm</strong>, il y a automatiquement le calcul
+du terme a, la corrélation et le terme b.</p>
+<p>Comme cela a été vu dans le chapitre sur la corrélation il est d’observer une
+relation linéaire entre la variable à expliquer et la variable explicative.</p>
+<p>Sinon il faut faire appliquer des transformations à la variable explicative.</p>
+<p>Cela suppose des liens linéaires entre la variable à expliquer et les variables
+explicatives.</p>
+<p>Par rapport à la corrélation, il y a un terme supplémentaire qui s’appelle en
+anglais l’<strong>intercept</strong> ou <strong>ordonnée à l’origine</strong>.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="régressions.html#cb45-1" tabindex="-1"></a><span class="fu">plot</span>(Sepal.Length<span class="sc">~</span>Petal.Width,<span class="at">data=</span>iris,<span class="at">pch=</span><span class="dv">20</span>)</span>
+<span id="cb45-2"><a href="régressions.html#cb45-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(Sepal.Length<span class="sc">~</span>Petal.Width,<span class="at">data=</span>iris))</span></code></pre></div>
+<p><img src="_main_files/figure-html/correlation-1.png" width="672" /></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="régressions.html#cb46-1" tabindex="-1"></a><span class="fu">lm</span>(Sepal.Length<span class="sc">~</span>Petal.Width,<span class="at">data=</span>iris)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Petal.Width, data = iris)
+## 
+## Coefficients:
+## (Intercept)  Petal.Width  
+##      4.7776       0.8886</code></pre>
+<p>Le coefficient entre la variable à expliquer et la variable explcative est de
+0,8886 tandis que l’ordonnée à l’origine est à 4.7776.</p>
+<p>Si vous regardez sur le graphique, l’ordonnée à l’origine est la valeur de <span class="math inline">\(y\)</span>
+quand <span class="math inline">\(x=0\)</span>. Ici pour la longueur des pétales et des sépales, l’<strong>intercept</strong>
+est la valeur pour une longueur nulle ce qui n’a pas de sens pratique.</p>
+<p>Aussi dans certains cas nous sommes amenés à centrer la variable en soutrayant la
+moyenne de la variable explicative pour avoir une valeur qui a du sens: en
+centrant la variable l’ordonnée à l’origine est la valeur de la variable à expliquer
+pour la valeur moyenne de la variable explicative.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="régressions.html#cb48-1" tabindex="-1"></a><span class="fu">lm</span>(Sepal.Length<span class="sc">~</span><span class="fu">I</span>(Petal.Width<span class="sc">-</span><span class="fu">mean</span>(Petal.Width)),<span class="at">data=</span>iris)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ I(Petal.Width - mean(Petal.Width)), 
+##     data = iris)
+## 
+## Coefficients:
+##                        (Intercept)  I(Petal.Width - mean(Petal.Width))  
+##                             5.8433                              0.8886</code></pre>
+<p>La valeurs pour la moyenne est donc de 5,8433 pour la valeur moyenne de
+<strong>Petal.width</strong>. Ce qui a plus de sens.</p>
+<p>Sous R, on peut réaliser des calculs, des transformations de la valeur directement
+dans la régression comme c’est le cas dans l’exemple précédent avec l’opérateur
+<strong>I()</strong>. On peut l’utiliser pour ajouter le calcul d’un <strong>log</strong> par exemple.</p>
+</div>
+<div id="multiple" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Multiple<a href="régressions.html#multiple" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La relation linéaire ne doit pas forcement être visible entre la variable à
+expliquer et les variables explicatives prises 2 à 2. En effet pour la
+régression linéaire multiple les autres variables rentrent en jeu ce qui a
+pour conséquence de rendre plus complexe la vérification de la relation
+linéraire.</p>
+<p><span class="math inline">\(y=b_1x_1+b_2x_2+...+b_ix_i+b_0+\epsilon\)</span></p>
+<p>Comme pour la régression précédente on utilise le <strong>~</strong> pour séparer à gauche la
+variable à expliquer des variables explicatives à droite. Les variables
+explicatives sont séparées par des <strong>+</strong>.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="régressions.html#cb50-1" tabindex="-1"></a><span class="fu">lm</span>(Sepal.Length<span class="sc">~</span>Sepal.Width<span class="sc">+</span>Petal.Width<span class="sc">+</span>Petal.Length,<span class="at">data=</span>iris)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Sepal.Width + Petal.Width + Petal.Length, 
+##     data = iris)
+## 
+## Coefficients:
+##  (Intercept)   Sepal.Width   Petal.Width  Petal.Length  
+##       1.8560        0.6508       -0.5565        0.7091</code></pre>
+<p>Là également on peut avoir envie de donner sens à la valeur de l’intercept. Il
+faut dans ce cas là enlever la moyenne à chaque variable pour centrer le modèle.
+Toujours avec l’opérateur <strong>I()</strong>.</p>
+<p>Si on veut savoir quel est le coefficient qui impacte le plus la variable
+explicative, on peut comparer les pentes. Si on veut comparer les coefficients
+il faut qu’ils soient dans la même unité. Dans ce cas la méthode usuelle est
+de diviser par l’écart-type les variables explicatives et éventuellement la
+variable à expliquer. Cela donne des coefficients standardisés dont la valeur
+absolue de la taille indique l’amplitude de l’effet sur chacun des coefficients.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="régressions.html#cb52-1" tabindex="-1"></a>iris.std <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), scale))</span>
+<span id="cb52-2"><a href="régressions.html#cb52-2" tabindex="-1"></a>(<span class="at">modele=</span><span class="fu">lm</span>(Sepal.Length<span class="sc">~</span>Sepal.Width<span class="sc">+</span>Petal.Width<span class="sc">+</span>Petal.Length,<span class="at">data=</span>iris.std))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Sepal.Width + Petal.Width + Petal.Length, 
+##     data = iris.std)
+## 
+## Coefficients:
+##  (Intercept)   Sepal.Width   Petal.Width  Petal.Length  
+##   -1.176e-16     3.426e-01    -5.122e-01     1.512e+00</code></pre>
+</div>
+<div id="les-diagnostics-pour-les-deux-types-de-régressions-linéaires" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Les diagnostics pour les deux types de régressions linéaires<a href="régressions.html#les-diagnostics-pour-les-deux-types-de-régressions-linéaires" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Avant de regarder les résultats, il faut vérifier que les diagnostics sont
+corrects. En effet pour interpréter les résultats et notamment l’inférence (comme
+les tests sur les coefficients par exemple) il faut qu’un certain nombre
+d’hypothèses soient vérifiées:</p>
+<ol style="list-style-type: decimal">
+<li>Non colinéarité des variables explicatives: aucune variable ne doit être une
+combinaison linéaire d’une autre variable.</li>
+<li>Indépendance des erreurs: les erreurs sont indépendantes entre observations</li>
+<li>Exogénéité : la taille des résidus doit être indépendante de la variable
+explicatives</li>
+<li>Homoscédasticité : la variance des erreurs est constante</li>
+<li>Normalité des termes d’erreur : la distribution des termes d’erreurs doit être
+aléatoire et suivre une loi normale</li>
+</ol>
+<p>La non colinéarité se vérifie simplement en calculant le modèle. En effet la matrice
+est non inversible ou n’est pas de plein rang quand il y a des variables colinéaires.
+Certains tests plus complexe existent pour vérifier cette hypothèse notamment
+lorsqu’on a beaucoup de variables.</p>
+<p>L’indépendance des résidus est rarement testé, il existe des tests comme le test
+de Durbin-Watson pour tester si les résidus sont auto-corrélés.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="régressions.html#cb54-1" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb54-2"><a href="régressions.html#cb54-2" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(modele)</span></code></pre></div>
+<pre><code>##  lag Autocorrelation D-W Statistic p-value
+##    1     -0.03992126      2.060382   0.798
+##  Alternative hypothesis: rho != 0</code></pre>
+<p>Si le test n’est pas significatif alors il n’y a pas d’auto-corrélation.</p>
+<p>Les autres hypothèses s’évaluent à l’aide des graphiques de diagnostics
+automatiques de R la plupart du temps :</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="régressions.html#cb56-1" tabindex="-1"></a><span class="fu">plot</span>(modele)</span></code></pre></div>
+<p><img src="_main_files/figure-html/diagnostics-1.png" width="672" /><img src="_main_files/figure-html/diagnostics-2.png" width="672" /><img src="_main_files/figure-html/diagnostics-3.png" width="672" /><img src="_main_files/figure-html/diagnostics-4.png" width="672" /></p>
+<ol style="list-style-type: decimal">
+<li>Le premier graphique <strong>Residuals vs Fitted</strong> permet de tester l’exogénéité.
+Si on observe pas de corrélation ou de structure entre les valeurs prédites et
+les résidus alors l’hypothèse est vérifiée.</li>
+<li>L’homoscédasticité et la normalité sont testés à l’aide du premier et second
+graphique qui permet de tester si la répartition suit une loi normale avec un
+graphique <strong>QQ plot</strong>. Si les points se distribuent sur la droite lors la
+distribution des résidus suit une loi normale.</li>
+</ol>
+<p>Les autres graphiques permettent de répérer les observations avec des valeurs
+extrêmes pour les résidus et les valeurs prédites. Dans le cas d’une régression
+avancée, il convient de vérifier les valeurs prises par ces observations extrêmes
+qui sont repérées par leurs numéros dans le <strong>data.frame</strong>.</p>
+</div>
+<div id="linterprétation-des-sorties" class="section level3 hasAnchor" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> L’interprétation des sorties<a href="régressions.html#linterprétation-des-sorties" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les sorties sont les suivantes :</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="régressions.html#cb57-1" tabindex="-1"></a><span class="fu">summary</span>(modele)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Sepal.Width + Petal.Width + Petal.Length, 
+##     data = iris.std)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.00012 -0.26555  0.02264  0.23802  1.02129 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -1.176e-16  3.102e-02   0.000        1    
+## Sepal.Width   3.426e-01  3.508e-02   9.765  &lt; 2e-16 ***
+## Petal.Width  -5.122e-01  1.174e-01  -4.363 2.41e-05 ***
+## Petal.Length  1.512e+00  1.209e-01  12.502  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3799 on 146 degrees of freedom
+## Multiple R-squared:  0.8586, Adjusted R-squared:  0.8557 
+## F-statistic: 295.5 on 3 and 146 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Le tableau donne la valeur des coefficients (<strong>Intercept</strong> et coefficients beta)
+dans la colonne <strong>Estimate</strong>. L’erreur standard associée à l’estimation des
+coefficients, <strong>Std. Error</strong>, la valeur du test et la <strong>p-value</strong> qui indique
+si le coefficient est non nul: si la <strong>p-value</strong> est inférieure au seuil fixé
+(généralement 0,05) alors le coefficient est significativement différent de 0.</p>
+<p>Regarder la valeur de l’erreur standard (<strong>Std Error</strong>) est important car si
+elle est très grande au regard des coefficients par exemple cela indique
+généralement que les hypothèses ne sont pas respectés et qu’il y a un problème
+d’identification du modèle.</p>
+<p>Ensuite les résultats sont le <strong>Multiple R-square</strong> qui indique le R²,
+c’est-à-dire la variance expliquée par le modèle. Une valeur le plus proche
+de 1 est ce que l’on cherche. Dans les sciences humaines des valeurs de coeffcients
+proche de 0,3 reste satisfaisant.</p>
+<p>les résultats sont le <strong>Adjusted R-square</strong> est équivalent au R² mais il est pondéré
+par la complexité du modèle. En effet plus il y a de variable explicatrice plus
+le modèle va être explicatif. Mécaniquement. Aussi ce coefficient permet de
+pondérer le R² avec le nombre de variables pour limiter cet effet.</p>
+<p>Le <strong>F-statistic</strong> et la <strong>p-value</strong> associée sur la dernière ligne donne un test
+de la non nullité du R². En pratique ce test n’est pas très utile.</p>
+</div>
+<div id="comprendre-la-régression-avec-des-variables-qualitatives" class="section level3 hasAnchor" number="4.2.5">
+<h3><span class="header-section-number">4.2.5</span> Comprendre la régression avec des variables qualitatives<a href="régressions.html#comprendre-la-régression-avec-des-variables-qualitatives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Jusqu’ici les variables étaient des variables quantitatives. Il fallait
+interpréter la pente des variables pour avoir une idée des effets sur la
+variable à expliquer.</p>
+<p>Dans le cas d’une variable explicative, l’interprétation est légèrement différente.</p>
+<p>Pour bien comprendre, on va dichotomiser une variable qualitative :</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="régressions.html#cb59-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb59-2"><a href="régressions.html#cb59-2" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">model.matrix</span>(<span class="sc">~</span>Species<span class="dv">-1</span>,<span class="at">data=</span>iris)[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(iris)),])</span></code></pre></div>
+<pre><code>##     Speciessetosa Speciesversicolor Speciesvirginica
+## 49              1                 0                0
+## 65              0                 1                0
+## 74              0                 1                0
+## 146             0                 0                1
+## 122             0                 0                1
+## 150             0                 0                1</code></pre>
+<p>On a trois espèces, quand R va ajouter cette variable, il va dichotomiser la variable.</p>
+<p>Nous aurons par exemple dans l’équation (première ligne) :</p>
+<p><span class="math inline">\(y=b_1x_1+b_2x_2+...+b_ix_i+b_Setosa*1+b_Versicolor*0+b_Virginica*0+b_0+\epsilon\)</span> soit
+<span class="math inline">\(y=b_1x_1+b_2x_2+...+b_ix_i+b_Setosa*1+b_0+\epsilon\)</span></p>
+<p>ou (deuxième ligne)</p>
+<p><span class="math inline">\(y=b_1x_1+b_2x_2+...+b_ix_i+b_Setosa*0+b_Versicolor*1+b_Virginica*0+b_0+\epsilon\)</span> soit
+<span class="math inline">\(y=b_1x_1+b_2x_2+...+b_ix_i+b_Versicolor*1+b_0+\epsilon\)</span></p>
+<p>Le <strong>x</strong> va être 0 ou 1. Par conséquent, cela ne va pas modifier la pente mais l’ordonnée
+à l’origine du point. De plus si on laisse les trois variables alors nous allons
+avoir un souci. En effet les trois modalités, si elles sont toutes présentes
+vont être colinéaires: si Setosa est à 1 alors Versicolor et Virginica sont à 0.
+C’est mécanique. Nous violerions alors une hypothèse du modèle.</p>
+<p>Donc nous allons enlever une des modalités que nous allons appeler modalité de
+référence. Donc l’intercept sera calculé avec cette modalité de référence:
+il faudra lire, l’<strong>intercept quand l’espèce est setosa vaut</strong>.
+Quand l’iris sera versicolor ou virginica, il faudra lire
+<strong>par rapport à une plante Setosa l’intercept quand l’espèce est versicolor vaut</strong>.</p>
+<p>Par défaut quand on rajoute une variable qualitative (un facteur) R utilise comme
+valeur de référence la première modalité pour une facteur ordonné ou bien la
+première dans l’ordre alphabétique. Pour changer ce comportement, il faut taper :</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="régressions.html#cb61-1" tabindex="-1"></a>(<span class="at">modele=</span><span class="fu">lm</span>(Sepal.Length<span class="sc">~</span>Sepal.Width<span class="sc">+</span>Petal.Width<span class="sc">+</span>Petal.Length<span class="sc">+</span><span class="fu">relevel</span>(Species,<span class="at">ref=</span><span class="st">&quot;versicolor&quot;</span>),<span class="at">data=</span>iris.std))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Sepal.Width + Petal.Width + Petal.Length + 
+##     relevel(Species, ref = &quot;versicolor&quot;), data = iris.std)
+## 
+## Coefficients:
+##                                   (Intercept)                                    Sepal.Width  
+##                                       -0.1705                                         0.2610  
+##                                   Petal.Width                                   Petal.Length  
+##                                       -0.2901                                         1.7678  
+##    relevel(Species, ref = &quot;versicolor&quot;)setosa  relevel(Species, ref = &quot;versicolor&quot;)virginica  
+##                                        0.8738                                        -0.3622</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="régressions.html#cb63-1" tabindex="-1"></a><span class="fu">summary</span>(modele)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Sepal.Width + Petal.Width + Petal.Length + 
+##     relevel(Species, ref = &quot;versicolor&quot;), data = iris.std)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.95915 -0.26416  0.01085  0.24460  0.88282 
+## 
+## Coefficients:
+##                                               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                                   -0.17053    0.07842  -2.175  0.03130 *  
+## Sepal.Width                                    0.26102    0.04530   5.761 4.87e-08 ***
+## Petal.Width                                   -0.29010    0.13918  -2.084  0.03889 *  
+## Petal.Length                                   1.76781    0.14609  12.101  &lt; 2e-16 ***
+## relevel(Species, ref = &quot;versicolor&quot;)setosa     0.87380    0.29004   3.013  0.00306 ** 
+## relevel(Species, ref = &quot;versicolor&quot;)virginica -0.36221    0.14369  -2.521  0.01280 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3705 on 144 degrees of freedom
+## Multiple R-squared:  0.8673, Adjusted R-squared:  0.8627 
+## F-statistic: 188.3 on 5 and 144 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>ou bien</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="régressions.html#cb65-1" tabindex="-1"></a>iris.std<span class="sc">$</span>Species2 <span class="ot">&lt;-</span> <span class="fu">relevel</span>(iris.std<span class="sc">$</span>Species,<span class="at">ref=</span><span class="st">&quot;versicolor&quot;</span>)</span>
+<span id="cb65-2"><a href="régressions.html#cb65-2" tabindex="-1"></a>(<span class="at">modele=</span><span class="fu">lm</span>(Sepal.Length<span class="sc">~</span>Sepal.Width<span class="sc">+</span>Petal.Width<span class="sc">+</span>Petal.Length<span class="sc">+</span>Species2,<span class="at">data=</span>iris.std))</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Sepal.Width + Petal.Width + Petal.Length + 
+##     Species2, data = iris.std)
+## 
+## Coefficients:
+##       (Intercept)        Sepal.Width        Petal.Width       Petal.Length     Species2setosa  Species2virginica  
+##           -0.1705             0.2610            -0.2901             1.7678             0.8738            -0.3622</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="régressions.html#cb67-1" tabindex="-1"></a><span class="fu">summary</span>(modele)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Sepal.Width + Petal.Width + Petal.Length + 
+##     Species2, data = iris.std)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.95915 -0.26416  0.01085  0.24460  0.88282 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       -0.17053    0.07842  -2.175  0.03130 *  
+## Sepal.Width        0.26102    0.04530   5.761 4.87e-08 ***
+## Petal.Width       -0.29010    0.13918  -2.084  0.03889 *  
+## Petal.Length       1.76781    0.14609  12.101  &lt; 2e-16 ***
+## Species2setosa     0.87380    0.29004   3.013  0.00306 ** 
+## Species2virginica -0.36221    0.14369  -2.521  0.01280 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3705 on 144 degrees of freedom
+## Multiple R-squared:  0.8673, Adjusted R-squared:  0.8627 
+## F-statistic: 188.3 on 5 and 144 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Il est à noter qu’on peut utiliser gtsummary :</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="régressions.html#cb69-1" tabindex="-1"></a>modele <span class="sc">|&gt;</span> </span>
+<span id="cb69-2"><a href="régressions.html#cb69-2" tabindex="-1"></a>  <span class="fu">tbl_regression</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb69-3"><a href="régressions.html#cb69-3" tabindex="-1"></a>  <span class="fu">bold_labels</span>()</span></code></pre></div>
+<div id="nnzaecvzmk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nnzaecvzmk table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#nnzaecvzmk thead, #nnzaecvzmk tbody, #nnzaecvzmk tfoot, #nnzaecvzmk tr, #nnzaecvzmk td, #nnzaecvzmk th {
+  border-style: none;
+}
+
+#nnzaecvzmk p {
+  margin: 0;
+  padding: 0;
+}
+
+#nnzaecvzmk .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#nnzaecvzmk .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nnzaecvzmk .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nnzaecvzmk .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nnzaecvzmk .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nnzaecvzmk .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nnzaecvzmk .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nnzaecvzmk .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nnzaecvzmk .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#nnzaecvzmk .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#nnzaecvzmk .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nnzaecvzmk .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nnzaecvzmk .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nnzaecvzmk .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nnzaecvzmk .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nnzaecvzmk .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#nnzaecvzmk .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#nnzaecvzmk .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#nnzaecvzmk .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nnzaecvzmk .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#nnzaecvzmk .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nnzaecvzmk .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nnzaecvzmk .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nnzaecvzmk .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nnzaecvzmk .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nnzaecvzmk .gt_left {
+  text-align: left;
+}
+
+#nnzaecvzmk .gt_center {
+  text-align: center;
+}
+
+#nnzaecvzmk .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nnzaecvzmk .gt_font_normal {
+  font-weight: normal;
+}
+
+#nnzaecvzmk .gt_font_bold {
+  font-weight: bold;
+}
+
+#nnzaecvzmk .gt_font_italic {
+  font-style: italic;
+}
+
+#nnzaecvzmk .gt_super {
+  font-size: 65%;
+}
+
+#nnzaecvzmk .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#nnzaecvzmk .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#nnzaecvzmk .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#nnzaecvzmk .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#nnzaecvzmk .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#nnzaecvzmk .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#nnzaecvzmk .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Beta&lt;/strong&gt;"><strong>Beta</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;95% CI&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;p-value&lt;/strong&gt;"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Sepal.Width</td>
+<td headers="estimate" class="gt_row gt_center">0.26</td>
+<td headers="ci" class="gt_row gt_center">0.17, 0.35</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Petal.Width</td>
+<td headers="estimate" class="gt_row gt_center">-0.29</td>
+<td headers="ci" class="gt_row gt_center">-0.57, -0.02</td>
+<td headers="p.value" class="gt_row gt_center">0.039</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Petal.Length</td>
+<td headers="estimate" class="gt_row gt_center">1.8</td>
+<td headers="ci" class="gt_row gt_center">1.5, 2.1</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Species2</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="ci" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    versicolor</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="ci" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    setosa</td>
+<td headers="estimate" class="gt_row gt_center">0.87</td>
+<td headers="ci" class="gt_row gt_center">0.30, 1.4</td>
+<td headers="p.value" class="gt_row gt_center">0.003</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    virginica</td>
+<td headers="estimate" class="gt_row gt_center">-0.36</td>
+<td headers="ci" class="gt_row gt_center">-0.65, -0.08</td>
+<td headers="p.value" class="gt_row gt_center">0.013</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<div id="régression-logistique" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Régression logistique<a href="régressions.html#régression-logistique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dans le cas de la régression logistique, la variable à expliquer est binaire ou
+dichotomique.</p>
+<p><span class="math inline">\(y=\frac{e^{b_1x_1+b_2x_2+...+b_ix_i+b_0}}{1+e^{b_1x_1+b_2x_2+...+b_ix_i+b_0}}\)</span></p>
+<p>En fait les observations vont prendre la valeur 0 ou 1 pour la variable à expliquer.
+Par contre le modèle lui ne va pas prendre que des valeurs 0 ou 1. En effet
+il va modéliser la probabilité que la valeur prise soit 1.</p>
+<p><strong>Donc les valeurs prises par le modèle vont varier de 0 à 1</strong>.</p>
+<div id="modélisation" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Modélisation<a href="régressions.html#modélisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’aspect du modèle sous R est très similaire à la forme utilisée pour les régressions
+linéaires. Les mêmes opérateurs et écritures sont autorisées.</p>
+<p>Par contre comme ce n’est pas une régression linéaire, la fonction à appeler est
+légèrement différente ainsi que les arguments supplémentaires.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="régressions.html#cb70-1" tabindex="-1"></a>modele <span class="ot">&lt;-</span> <span class="fu">glm</span>(Outcome<span class="sc">~</span>Pregnancies<span class="sc">+</span>Glucose<span class="sc">+</span>BloodPressure<span class="sc">+</span>SkinThickness<span class="sc">+</span>Insulin<span class="sc">+</span>BMI<span class="sc">+</span>DiabetesPedigreeFunction<span class="sc">+</span></span>
+<span id="cb70-2"><a href="régressions.html#cb70-2" tabindex="-1"></a>      DiabetesPedigreeFunction<span class="sc">+</span>Age,<span class="at">data=</span>diabetes,<span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="régressions.html#cb71-1" tabindex="-1"></a><span class="fu">summary</span>(modele)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Outcome ~ Pregnancies + Glucose + BloodPressure + 
+##     SkinThickness + Insulin + BMI + DiabetesPedigreeFunction + 
+##     DiabetesPedigreeFunction + Age, family = binomial(link = &quot;logit&quot;), 
+##     data = diabetes)
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)              -8.0264511  0.4306345 -18.639  &lt; 2e-16 ***
+## Pregnancies               0.1263845  0.0199997   6.319 2.63e-10 ***
+## Glucose                   0.0337202  0.0022258  15.150  &lt; 2e-16 ***
+## BloodPressure            -0.0096446  0.0032441  -2.973  0.00295 ** 
+## SkinThickness             0.0005185  0.0042301   0.123  0.90244    
+## Insulin                  -0.0012426  0.0005786  -2.148  0.03175 *  
+## BMI                       0.0775549  0.0088819   8.732  &lt; 2e-16 ***
+## DiabetesPedigreeFunction  0.8877583  0.1860275   4.772 1.82e-06 ***
+## Age                       0.0129414  0.0057020   2.270  0.02323 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 2569.4  on 1999  degrees of freedom
+## Residual deviance: 1914.3  on 1991  degrees of freedom
+## AIC: 1932.3
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>Ici il n’y a pas d’hypothèse à vérifier particulièrement.</p>
+<p>Nous retrouvons le tableau des coefficients avec les estimations et les p-values.</p>
+<p>Les <strong>Estimates</strong> sont d’une interprétation très différents.</p>
+<p>Pour les variables continues, les coefficients sont interprétables selon leur
+signe si ils sont significativement différents de 0. Si le signe est négatif
+alors l’augmentation de la valeur tend à diminuer la probabilité que l’outcome
+soit égal à 1 et inversement.</p>
+<p>Pour les variables dichotomiques, en prenant l’exponentielle du coefficient, nous
+obtenons l’odds ratio:
+1) OR=1, la maladie est indépendante du symptôme
+2) OR&gt;1, la maladie est plus fréquente pour les individus qui ont le symptôme (var=1).
+3) OR&lt;1, la maladie est plus fréquente pour les individus qui n’ont pas le symptôme (var=0).</p>
+<p>Pour une régression logistique, il n’y a pas de R². Parfois on peut voir un
+pseudo R². Mais sont utilisation n’est pas recommandé.</p>
+<p>Sous R, il faut calculer la régression logistique avec la fonction <strong>lrm</strong> du
+paquet <strong>rms</strong>.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="régressions.html#cb73-1" tabindex="-1"></a><span class="fu">library</span>(rms)</span>
+<span id="cb73-2"><a href="régressions.html#cb73-2" tabindex="-1"></a>mod1b <span class="ot">&lt;-</span> <span class="fu">lrm</span>(Outcome<span class="sc">~</span>Pregnancies<span class="sc">+</span>Glucose<span class="sc">+</span>BloodPressure<span class="sc">+</span>SkinThickness<span class="sc">+</span>Insulin<span class="sc">+</span>BMI<span class="sc">+</span>DiabetesPedigreeFunction<span class="sc">+</span></span>
+<span id="cb73-3"><a href="régressions.html#cb73-3" tabindex="-1"></a>      DiabetesPedigreeFunction<span class="sc">+</span>Age,<span class="at">data=</span>diabetes)</span>
+<span id="cb73-4"><a href="régressions.html#cb73-4" tabindex="-1"></a><span class="fu">print</span>(mod1b)</span></code></pre></div>
+<pre><code>## Logistic Regression Model
+## 
+## lrm(formula = Outcome ~ Pregnancies + Glucose + BloodPressure + 
+##     SkinThickness + Insulin + BMI + DiabetesPedigreeFunction + 
+##     DiabetesPedigreeFunction + Age, data = diabetes)
+## 
+##                        Model Likelihood       Discrimination    Rank Discrim.    
+##                              Ratio Test              Indexes          Indexes    
+## Obs          2000    LR chi2     655.08       R2       0.386    C       0.837    
+##  0           1316    d.f.             8      R2(8,2000)0.276    Dxy     0.675    
+##  1            684    Pr(&gt; chi2) &lt;0.0001    R2(8,1350.2)0.381    gamma   0.675    
+## max |deriv| 2e-08                             Brier    0.154    tau-a   0.304    
+## 
+##                          Coef    S.E.   Wald Z Pr(&gt;|Z|)
+## Intercept                -8.0265 0.4306 -18.64 &lt;0.0001 
+## Pregnancies               0.1264 0.0200   6.32 &lt;0.0001 
+## Glucose                   0.0337 0.0022  15.15 &lt;0.0001 
+## BloodPressure            -0.0096 0.0032  -2.97 0.0029  
+## SkinThickness             0.0005 0.0042   0.12 0.9024  
+## Insulin                  -0.0012 0.0006  -2.15 0.0317  
+## BMI                       0.0776 0.0089   8.73 &lt;0.0001 
+## DiabetesPedigreeFunction  0.8878 0.1860   4.77 &lt;0.0001 
+## Age                       0.0129 0.0057   2.27 0.0232</code></pre>
+<!-- Sinon on peut calculer la probabilité de l'évènement avec cette fonction : -->
+<!-- ```{r} -->
+<!-- logit_inverse <- binomial("logit") |> purrr::pluck("linkinv") -->
+<!-- logit_inverse(coef(modele)) -->
+<!-- ``` -->
+<!-- Les interprétations pour les variables quantitatives est délicat. Attention à  -->
+<!-- l'intercept, c'est pour une valeur où tous les autres variables valent zéro.  -->
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="régressions.html#cb75-1" tabindex="-1"></a>modele <span class="sc">|&gt;</span> </span>
+<span id="cb75-2"><a href="régressions.html#cb75-2" tabindex="-1"></a>  ggstats<span class="sc">::</span><span class="fu">ggcoef_table</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/graphforests-1.png" width="672" /></p>
+</div>
+</div>
+<div id="sélection-des-variables" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Sélection des variables<a href="régressions.html#sélection-des-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="régressions-pas-à-pas" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Régressions pas à pas<a href="régressions.html#régressions-pas-à-pas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cela consiste à comparer des modèles en changer les variables une par une en
+calculant si la variable améliore ou détériore le modèle. Comme valeur de comparer
+la fonction utilise l’AIC ou le BIC qui sont des indices de <strong>fit</strong> du modèle.</p>
+<p>Soit :
+1) on part d’un modèle avec toutes les variables et on enlève au fur et à mesure (backward)
+2) on part d’un modèle avec une variable choisie aléatoirement et on ajoute au fur et à mesure (forward)
+3) on part d’un modèle avec une variable choisie aléatoirement et on ajoute au fur et à mesure ou on enlève (both ou stepwise)</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="régressions.html#cb76-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb76-2"><a href="régressions.html#cb76-2" tabindex="-1"></a>(modele2 <span class="ot">&lt;-</span> <span class="fu">step</span>(modele,<span class="at">direction=</span><span class="st">&quot;both&quot;</span>))</span></code></pre></div>
+<pre><code>## Start:  AIC=1932.33
+## Outcome ~ Pregnancies + Glucose + BloodPressure + SkinThickness + 
+##     Insulin + BMI + DiabetesPedigreeFunction + DiabetesPedigreeFunction + 
+##     Age
+## 
+##                            Df Deviance    AIC
+## - SkinThickness             1   1914.3 1930.3
+## &lt;none&gt;                          1914.3 1932.3
+## - Insulin                   1   1919.0 1935.0
+## - Age                       1   1919.5 1935.5
+## - BloodPressure             1   1923.2 1939.2
+## - DiabetesPedigreeFunction  1   1937.6 1953.6
+## - Pregnancies               1   1955.7 1971.7
+## - BMI                       1   1999.9 2015.9
+## - Glucose                   1   2203.3 2219.3
+## 
+## Step:  AIC=1930.35
+## Outcome ~ Pregnancies + Glucose + BloodPressure + Insulin + BMI + 
+##     DiabetesPedigreeFunction + Age
+## 
+##                            Df Deviance    AIC
+## &lt;none&gt;                          1914.3 1930.3
+## + SkinThickness             1   1914.3 1932.3
+## - Age                       1   1919.5 1933.5
+## - Insulin                   1   1919.7 1933.7
+## - BloodPressure             1   1923.4 1937.4
+## - DiabetesPedigreeFunction  1   1937.8 1951.8
+## - Pregnancies               1   1955.8 1969.8
+## - BMI                       1   2009.6 2023.6
+## - Glucose                   1   2209.0 2223.0</code></pre>
+<pre><code>## 
+## Call:  glm(formula = Outcome ~ Pregnancies + Glucose + BloodPressure + 
+##     Insulin + BMI + DiabetesPedigreeFunction + Age, family = binomial(link = &quot;logit&quot;), 
+##     data = diabetes)
+## 
+## Coefficients:
+##              (Intercept)               Pregnancies                   Glucose             BloodPressure  
+##                -8.027315                  0.126371                  0.033681                 -0.009581  
+##                  Insulin                       BMI  DiabetesPedigreeFunction                       Age  
+##                -0.001212                  0.077874                  0.889495                  0.012894  
+## 
+## Degrees of Freedom: 1999 Total (i.e. Null);  1992 Residual
+## Null Deviance:       2569 
+## Residual Deviance: 1914  AIC: 1930</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="régressions.html#cb79-1" tabindex="-1"></a><span class="fu">summary</span>(modele2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Outcome ~ Pregnancies + Glucose + BloodPressure + 
+##     Insulin + BMI + DiabetesPedigreeFunction + Age, family = binomial(link = &quot;logit&quot;), 
+##     data = diabetes)
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)              -8.0273146  0.4306244 -18.641  &lt; 2e-16 ***
+## Pregnancies               0.1263707  0.0199944   6.320 2.61e-10 ***
+## Glucose                   0.0336810  0.0022020  15.296  &lt; 2e-16 ***
+## BloodPressure            -0.0095806  0.0032013  -2.993  0.00276 ** 
+## Insulin                  -0.0012123  0.0005228  -2.319  0.02042 *  
+## BMI                       0.0778743  0.0084946   9.167  &lt; 2e-16 ***
+## DiabetesPedigreeFunction  0.8894946  0.1855205   4.795 1.63e-06 ***
+## Age                       0.0128944  0.0056879   2.267  0.02339 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 2569.4  on 1999  degrees of freedom
+## Residual deviance: 1914.3  on 1992  degrees of freedom
+## AIC: 1930.3
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>Ces méthodes ne sont pas enthousiasmantes. En effet cela amène à des modèles qui :</p>
+<ul>
+<li>dépendent du modèles tirés au hasard au début (stepwise/both)</li>
+<li>sont conservatifs comme la méthode backward qui tend à garder plus de variable que nécessaire</li>
+<li>nécessite beaucoup de comparaison et donc des approximations sur les tests</li>
+<li>…</li>
+</ul>
+<p>Il est à noter que si on veut garder les variables dont les coefficients sont significatifs
+à 0,05, il suffit de modifier le paramètre k.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="régressions.html#cb81-1" tabindex="-1"></a><span class="fu">require</span>(MASS)</span>
+<span id="cb81-2"><a href="régressions.html#cb81-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb81-3"><a href="régressions.html#cb81-3" tabindex="-1"></a>(modele2 <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(modele,<span class="at">direction=</span><span class="st">&quot;both&quot;</span>,<span class="at">k=</span><span class="dv">5</span>))</span></code></pre></div>
+<pre><code>## Start:  AIC=1959.33
+## Outcome ~ Pregnancies + Glucose + BloodPressure + SkinThickness + 
+##     Insulin + BMI + DiabetesPedigreeFunction + DiabetesPedigreeFunction + 
+##     Age
+## 
+##                            Df Deviance    AIC
+## - SkinThickness             1   1914.3 1954.3
+## - Insulin                   1   1919.0 1959.0
+## &lt;none&gt;                          1914.3 1959.3
+## - Age                       1   1919.5 1959.5
+## - BloodPressure             1   1923.2 1963.2
+## - DiabetesPedigreeFunction  1   1937.6 1977.6
+## - Pregnancies               1   1955.7 1995.7
+## - BMI                       1   1999.9 2039.9
+## - Glucose                   1   2203.3 2243.3
+## 
+## Step:  AIC=1954.35
+## Outcome ~ Pregnancies + Glucose + BloodPressure + Insulin + BMI + 
+##     DiabetesPedigreeFunction + Age
+## 
+##                            Df Deviance    AIC
+## &lt;none&gt;                          1914.3 1954.3
+## - Age                       1   1919.5 1954.5
+## - Insulin                   1   1919.7 1954.7
+## - BloodPressure             1   1923.4 1958.4
+## + SkinThickness             1   1914.3 1959.3
+## - DiabetesPedigreeFunction  1   1937.8 1972.8
+## - Pregnancies               1   1955.8 1990.8
+## - BMI                       1   2009.6 2044.6
+## - Glucose                   1   2209.0 2244.0</code></pre>
+<pre><code>## 
+## Call:  glm(formula = Outcome ~ Pregnancies + Glucose + BloodPressure + 
+##     Insulin + BMI + DiabetesPedigreeFunction + Age, family = binomial(link = &quot;logit&quot;), 
+##     data = diabetes)
+## 
+## Coefficients:
+##              (Intercept)               Pregnancies                   Glucose             BloodPressure  
+##                -8.027315                  0.126371                  0.033681                 -0.009581  
+##                  Insulin                       BMI  DiabetesPedigreeFunction                       Age  
+##                -0.001212                  0.077874                  0.889495                  0.012894  
+## 
+## Degrees of Freedom: 1999 Total (i.e. Null);  1992 Residual
+## Null Deviance:       2569 
+## Residual Deviance: 1914  AIC: 1930</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="régressions.html#cb84-1" tabindex="-1"></a><span class="fu">summary</span>(modele2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Outcome ~ Pregnancies + Glucose + BloodPressure + 
+##     Insulin + BMI + DiabetesPedigreeFunction + Age, family = binomial(link = &quot;logit&quot;), 
+##     data = diabetes)
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)              -8.0273146  0.4306244 -18.641  &lt; 2e-16 ***
+## Pregnancies               0.1263707  0.0199944   6.320 2.61e-10 ***
+## Glucose                   0.0336810  0.0022020  15.296  &lt; 2e-16 ***
+## BloodPressure            -0.0095806  0.0032013  -2.993  0.00276 ** 
+## Insulin                  -0.0012123  0.0005228  -2.319  0.02042 *  
+## BMI                       0.0778743  0.0084946   9.167  &lt; 2e-16 ***
+## DiabetesPedigreeFunction  0.8894946  0.1855205   4.795 1.63e-06 ***
+## Age                       0.0128944  0.0056879   2.267  0.02339 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 2569.4  on 1999  degrees of freedom
+## Residual deviance: 1914.3  on 1992  degrees of freedom
+## AIC: 1930.3
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>Pour contrer certaines critiques il est possible de personnaliser le démarrage et
+les variables à disposition à l’aide de l’argument <strong>scope</strong>.</p>
+<p>Par exemple pour un <strong>stepwise</strong> en démarrant de <strong>rien</strong>.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="régressions.html#cb86-1" tabindex="-1"></a>modnull <span class="ot">&lt;-</span> <span class="fu">glm</span>(Outcome <span class="sc">~</span> <span class="dv">1</span>,<span class="at">data=</span>diabetes,<span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb86-2"><a href="régressions.html#cb86-2" tabindex="-1"></a>modfull <span class="ot">&lt;-</span> <span class="fu">glm</span>(Outcome <span class="sc">~</span> .,<span class="at">data=</span>diabetes,<span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb86-3"><a href="régressions.html#cb86-3" tabindex="-1"></a>(modele3 <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(modele,<span class="at">direction=</span><span class="st">&quot;both&quot;</span>,<span class="at">k=</span><span class="dv">5</span>,</span>
+<span id="cb86-4"><a href="régressions.html#cb86-4" tabindex="-1"></a>                    <span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span>modnull,<span class="at">upper=</span>modfull)))</span></code></pre></div>
+<pre><code>## Start:  AIC=1959.33
+## Outcome ~ Pregnancies + Glucose + BloodPressure + SkinThickness + 
+##     Insulin + BMI + DiabetesPedigreeFunction + DiabetesPedigreeFunction + 
+##     Age
+## 
+##                            Df Deviance    AIC
+## - SkinThickness             1   1914.3 1954.3
+## - Insulin                   1   1919.0 1959.0
+## &lt;none&gt;                          1914.3 1959.3
+## - Age                       1   1919.5 1959.5
+## - BloodPressure             1   1923.2 1963.2
+## - DiabetesPedigreeFunction  1   1937.6 1977.6
+## - Pregnancies               1   1955.7 1995.7
+## - BMI                       1   1999.9 2039.9
+## - Glucose                   1   2203.3 2243.3
+## 
+## Step:  AIC=1954.35
+## Outcome ~ Pregnancies + Glucose + BloodPressure + Insulin + BMI + 
+##     DiabetesPedigreeFunction + Age
+## 
+##                            Df Deviance    AIC
+## &lt;none&gt;                          1914.3 1954.3
+## - Age                       1   1919.5 1954.5
+## - Insulin                   1   1919.7 1954.7
+## - BloodPressure             1   1923.4 1958.4
+## + SkinThickness             1   1914.3 1959.3
+## - DiabetesPedigreeFunction  1   1937.8 1972.8
+## - Pregnancies               1   1955.8 1990.8
+## - BMI                       1   2009.6 2044.6
+## - Glucose                   1   2209.0 2244.0</code></pre>
+<pre><code>## 
+## Call:  glm(formula = Outcome ~ Pregnancies + Glucose + BloodPressure + 
+##     Insulin + BMI + DiabetesPedigreeFunction + Age, family = binomial(link = &quot;logit&quot;), 
+##     data = diabetes)
+## 
+## Coefficients:
+##              (Intercept)               Pregnancies                   Glucose             BloodPressure  
+##                -8.027315                  0.126371                  0.033681                 -0.009581  
+##                  Insulin                       BMI  DiabetesPedigreeFunction                       Age  
+##                -0.001212                  0.077874                  0.889495                  0.012894  
+## 
+## Degrees of Freedom: 1999 Total (i.e. Null);  1992 Residual
+## Null Deviance:       2569 
+## Residual Deviance: 1914  AIC: 1930</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="régressions.html#cb89-1" tabindex="-1"></a><span class="fu">summary</span>(modele3)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = Outcome ~ Pregnancies + Glucose + BloodPressure + 
+##     Insulin + BMI + DiabetesPedigreeFunction + Age, family = binomial(link = &quot;logit&quot;), 
+##     data = diabetes)
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)              -8.0273146  0.4306244 -18.641  &lt; 2e-16 ***
+## Pregnancies               0.1263707  0.0199944   6.320 2.61e-10 ***
+## Glucose                   0.0336810  0.0022020  15.296  &lt; 2e-16 ***
+## BloodPressure            -0.0095806  0.0032013  -2.993  0.00276 ** 
+## Insulin                  -0.0012123  0.0005228  -2.319  0.02042 *  
+## BMI                       0.0778743  0.0084946   9.167  &lt; 2e-16 ***
+## DiabetesPedigreeFunction  0.8894946  0.1855205   4.795 1.63e-06 ***
+## Age                       0.0128944  0.0056879   2.267  0.02339 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 2569.4  on 1999  degrees of freedom
+## Residual deviance: 1914.3  on 1992  degrees of freedom
+## AIC: 1930.3
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>Il est à noter que les résultats peuvent être donnés par gtsummary</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="régressions.html#cb91-1" tabindex="-1"></a>modele3 <span class="sc">|&gt;</span> </span>
+<span id="cb91-2"><a href="régressions.html#cb91-2" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb91-3"><a href="régressions.html#cb91-3" tabindex="-1"></a>  <span class="fu">bold_labels</span>()</span></code></pre></div>
+<div id="qeayjdrzqo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qeayjdrzqo table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qeayjdrzqo thead, #qeayjdrzqo tbody, #qeayjdrzqo tfoot, #qeayjdrzqo tr, #qeayjdrzqo td, #qeayjdrzqo th {
+  border-style: none;
+}
+
+#qeayjdrzqo p {
+  margin: 0;
+  padding: 0;
+}
+
+#qeayjdrzqo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qeayjdrzqo .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qeayjdrzqo .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qeayjdrzqo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qeayjdrzqo .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qeayjdrzqo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qeayjdrzqo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qeayjdrzqo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qeayjdrzqo .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qeayjdrzqo .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qeayjdrzqo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qeayjdrzqo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qeayjdrzqo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qeayjdrzqo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qeayjdrzqo .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qeayjdrzqo .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qeayjdrzqo .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qeayjdrzqo .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qeayjdrzqo .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qeayjdrzqo .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qeayjdrzqo .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qeayjdrzqo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qeayjdrzqo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qeayjdrzqo .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qeayjdrzqo .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qeayjdrzqo .gt_left {
+  text-align: left;
+}
+
+#qeayjdrzqo .gt_center {
+  text-align: center;
+}
+
+#qeayjdrzqo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qeayjdrzqo .gt_font_normal {
+  font-weight: normal;
+}
+
+#qeayjdrzqo .gt_font_bold {
+  font-weight: bold;
+}
+
+#qeayjdrzqo .gt_font_italic {
+  font-style: italic;
+}
+
+#qeayjdrzqo .gt_super {
+  font-size: 65%;
+}
+
+#qeayjdrzqo .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qeayjdrzqo .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qeayjdrzqo .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qeayjdrzqo .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qeayjdrzqo .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qeayjdrzqo .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qeayjdrzqo .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;Characteristic&lt;/strong&gt;"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;OR&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>OR</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;95% CI&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;p-value&lt;/strong&gt;"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Pregnancies</td>
+<td headers="estimate" class="gt_row gt_center">1.13</td>
+<td headers="ci" class="gt_row gt_center">1.09, 1.18</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Glucose</td>
+<td headers="estimate" class="gt_row gt_center">1.03</td>
+<td headers="ci" class="gt_row gt_center">1.03, 1.04</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">BloodPressure</td>
+<td headers="estimate" class="gt_row gt_center">0.99</td>
+<td headers="ci" class="gt_row gt_center">0.98, 1.00</td>
+<td headers="p.value" class="gt_row gt_center">0.003</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Insulin</td>
+<td headers="estimate" class="gt_row gt_center">1.00</td>
+<td headers="ci" class="gt_row gt_center">1.00, 1.00</td>
+<td headers="p.value" class="gt_row gt_center">0.020</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">BMI</td>
+<td headers="estimate" class="gt_row gt_center">1.08</td>
+<td headers="ci" class="gt_row gt_center">1.06, 1.10</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">DiabetesPedigreeFunction</td>
+<td headers="estimate" class="gt_row gt_center">2.43</td>
+<td headers="ci" class="gt_row gt_center">1.69, 3.51</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Age</td>
+<td headers="estimate" class="gt_row gt_center">1.01</td>
+<td headers="ci" class="gt_row gt_center">1.00, 1.02</td>
+<td headers="p.value" class="gt_row gt_center">0.023</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> OR = Odds Ratio, CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<p>On peut comparer l’efficacité des modèles en utilisant la commande <strong>compare_performance</strong>
+du paquet <strong>performance</strong>.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="régressions.html#cb92-1" tabindex="-1"></a>performance<span class="sc">::</span><span class="fu">compare_performance</span>(modele, modele3,<span class="at">metrics=</span><span class="st">&quot;common&quot;</span>)</span></code></pre></div>
+<pre><code>## # Comparison of Model Performance Indices
+## 
+## Name    | Model |  AIC (weights) |  BIC (weights) | Tjur&#39;s R2 |  RMSE
+## ---------------------------------------------------------------------
+## modele  |   glm | 1932.3 (0.270) | 1982.7 (0.022) |     0.310 | 0.393
+## modele3 |   glm | 1930.3 (0.730) | 1975.2 (0.978) |     0.310 | 0.393</code></pre>
+</div>
+<div id="régression-ridge-lasso-elastic" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Régression Ridge, LASSO, Elastic, …<a href="régressions.html#régression-ridge-lasso-elastic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ces méthodes qui seront proposées plus tard sont une alternative au méthodes
+pas à pas. Elles consiste à pondérer les coefficients et ainsi séléctionner
+les variables à part de critère mathématique plus robustes.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tests.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-Regression.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

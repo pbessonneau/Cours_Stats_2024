@@ -1,0 +1,62 @@
+```{r packages_regression,include=FALSE,message=F,warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(RColorBrewer)
+library(SuppDists)
+```
+
+# Régressions
+
+
+## Introduction
+
+Sous le terme de régression se cache de nombreux modèles: parmi les plus simples
+en statistiques comme la régression linéaire et pour aller jusqu'à des modèles
+très complexes comme les modèles multiniveaux, la régression quantile, etc.
+
+La présentation ici ne se veut pas exhaustive. Nous présenterons que les régressions
+couramment utilisées dans en psychologie. 
+
+## Régression linéaire
+
+### Simple
+
+Dans les statistiques descriptives, nous avons vu la corrélation. La régression
+linéaire simple n'est qu'une extension de la corrélation.
+
+\(y=ax+b+\epsilon\)
+
+Cela suppose des liens linéaires entre la variable à expliquer et les variables
+explicatives.
+
+https://www.kaggle.com/datasets/kumarajarshi/life-expectancy-who?select=Life+Expectancy+Data.csv
+https://www.kaggle.com/datasets/mirichoi0218/insurance
+https://www.kaggle.com/datasets/spittman1248/cdc-data-nutrition-physical-activity-obesity
+
+
+### Multiple
+
+\(y=b_1x_1+b_2x_2+...+b_ix_i+b_0+\epsilon\)
+
+
+## Régression logistique
+
+\(y=\frac{e^{b_1x_1+b_2x_2+...+b_ix_i+b_0}}{1+e^{b_1x_1+b_2x_2+...+b_ix_i+b_0}}\)
+
+## Sélection des variables
+
+
+
+### Régressions pas à pas
+
+
+
+
+### Régression LASSO, ELASTIC, ...
+
+
+
+
+
+
+

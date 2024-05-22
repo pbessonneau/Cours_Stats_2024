@@ -1,0 +1,2 @@
+"0","modele |> "
+"0","  ggstats::ggcoef_table(exponentiate = TRUE)"

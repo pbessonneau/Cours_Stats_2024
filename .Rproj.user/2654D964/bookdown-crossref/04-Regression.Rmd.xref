@@ -1,0 +1,14 @@
+h1:régressions Régressions
+h2:introduction Introduction
+h2:régression-linéaire Régression linéaire
+h3:simple Simple
+h3:multiple Multiple
+h3:les-diagnostics-pour-les-deux-types-de-régressions-linéaires Les diagnostics pour les deux types de régressions linéaires
+h3:linterprétation-des-sorties L’interprétation des sorties
+h3:comprendre-la-régression-avec-des-variables-qualitatives Comprendre la régression avec des variables qualitatives
+h2:régression-logistique Régression logistique
+h3:modélisation Modélisation
+h2:sélection-des-variables Sélection des variables
+h3:régressions-pas-à-pas Régressions pas à pas
+h3:régression-ridge-lasso-elastic Régression Ridge, LASSO, Elastic, …
+

@@ -1,0 +1,3 @@
+"0","modele3 |> "
+"0","  tbl_regression(exponentiate = TRUE) |> "
+"0","  bold_labels()"
